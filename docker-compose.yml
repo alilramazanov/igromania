@@ -1,0 +1,72 @@
+version: "3.7"
+services:
+  postgresql:
+    build:
+      context: ./docker
+      dockerfile: ./postgres/Dockerfile
+    volumes:
+      - ./database/postgres/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: gidtravel
+      POSTGRES_USER: gidtravel
+      POSTGRES_PASSWORD: gid123
+    ports:
+      - "5431:5432"
+  redis:
+    image: redis:7.0-rc
+    ports:
+      - "6379:6379"
+  rabbitmq:
+    build:
+      context: ./docker
+      dockerfile: ./rabbitmq/Dockerfile
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      RABBITMQ_LOGS: /var/log/rabbitmq/rabbit.log
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: root
+  nginx:
+    build:
+      context: ./docker
+      dockerfile: ./nginx/Dockerfile
+    volumes:
+      - ./app:/var/www/app
+    ports:
+      - "8081:80"
+    depends_on:
+      - php-fpm
+  php-fpm:
+    build:
+      context: ./docker
+      dockerfile: ./php-fpm/Dockerfile
+    volumes:
+      - ./app:/var/www/app
+    depends_on:
+      - postgresql
+      - redis
+    environment:
+      DB_PORT: 5432
+      DB_HOST: postgresql
+      REDIS_PORT: 6379
+      REDIS_HOST: redis
+    links:
+      - "postgresql:app"
+  php-cli:
+    build:
+      context: ./docker
+      dockerfile: ./php-cli/Dockerfile
+    volumes:
+      - ./app:/var/www/app
+    depends_on:
+      - postgresql
+      - redis
+    environment:
+      DB_PORT: 5432
+      DB_HOST: postgresql
+      REDIS_PORT: 6379
+      REDIS_HOST: redis
+    links:
+      - "postgresql:app"
+    tty: true
