@@ -119,6 +119,9 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/mime" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/league/flysystem" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/polyfill-iconv" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/namshi/jose" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/tymon/jwt-auth" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,32 +1,15 @@
 version: "3.7"
 services:
   postgresql:
-    build:
-      context: ./docker
-      dockerfile: ./postgres/Dockerfile
+    image: postgres:14
     volumes:
       - ./database/postgres/data:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: gidtravel
-      POSTGRES_USER: gidtravel
-      POSTGRES_PASSWORD: gid123
+      POSTGRES_DB: igromania
+      POSTGRES_USER: igromania
+      POSTGRES_PASSWORD: 123igr
     ports:
-      - "5431:5432"
-  redis:
-    image: redis:7.0-rc
-    ports:
-      - "6379:6379"
-  rabbitmq:
-    build:
-      context: ./docker
-      dockerfile: ./rabbitmq/Dockerfile
-    ports:
-      - "15672:15672"
-      - "5672:5672"
-    environment:
-      RABBITMQ_LOGS: /var/log/rabbitmq/rabbit.log
-      RABBITMQ_DEFAULT_USER: root
-      RABBITMQ_DEFAULT_PASS: root
+      - "5435:5432"
   nginx:
     build:
       context: ./docker
@@ -70,3 +53,7 @@ services:
     links:
       - "postgresql:app"
     tty: true
+  redis:
+    image: redis:7.0-rc
+    ports:
+      - "6379:6379"
