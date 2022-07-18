@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Igromania;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Game\Auth\LoginRequest;
-use App\Http\Requests\Game\Auth\RegistrationRequest;
+use App\Http\Requests\Igromania\Auth\LoginRequest;
+use App\Http\Requests\Igromania\Auth\RegistrationRequest;
 use App\Http\Responses\ApiResponse;
 use App\Models\User;
-use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller

@@ -36,7 +36,6 @@ Route::group(
                     }
                 );
 
-
                 Route::group(['prefix' => 'games', 'middleware' => 'auth'],
                     function () {
                         Route::get('list', 'Igromania\GameController@list');
@@ -44,8 +43,8 @@ Route::group(
                         Route::group(['middleware'=>'role.admin'],
                             function (){
                             Route::post('create', 'Igromania\GameController@create');
-                            Route::put('update','Igromania\GameController@update' );
-                            Route::delete('delete', 'Igromania\GameController@delete');
+                            Route::post('update','Igromania\GameController@update' );
+                            Route::post('delete', 'Igromania\GameController@delete');
 
                             }
                         );

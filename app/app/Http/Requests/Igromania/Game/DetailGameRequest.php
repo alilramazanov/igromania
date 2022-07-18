@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Game\Auth;
+namespace App\Http\Requests\Igromania\Game;
 
 use App\Http\Requests\ApiRequest;
-use App\Models\User;
 
-class LoginRequest extends ApiRequest
+class DetailGameRequest extends ApiRequest
 {
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -15,10 +15,8 @@ class LoginRequest extends ApiRequest
      */
     public function rules()
     {
-
         return [
-            'email' => 'email|required',
-            'password' => 'min:6|max:50|string|required'
+            'id' => 'integer|required|exists:games,id'
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Game\Auth;
+namespace App\Http\Requests\Igromania\Auth;
 
 
 use App\Http\Requests\ApiRequest;
