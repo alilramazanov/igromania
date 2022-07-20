@@ -21,7 +21,7 @@ class ApiAuthenticate
     {
 
         if (empty(auth()->id())) {
-            return ApiResponse::response(401,'Unauthorized');
+            return response('Unauthorized', 401);
         }
         return $next($request);
     }

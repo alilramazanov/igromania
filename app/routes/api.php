@@ -36,11 +36,11 @@ Route::group(
                     }
                 );
 
-                Route::group(['prefix' => 'games', 'middleware' => 'auth'],
+                Route::group(['prefix' => 'games'],
                     function () {
                         Route::get('list', 'Igromania\GameController@list');
                         Route::get('detail','Igromania\GameController@detail');
-                        Route::group(['middleware'=>'role.admin'],
+                        Route::group(['middleware'=>['auth', 'role.admin',]],
                             function (){
                             Route::post('create', 'Igromania\GameController@create');
                             Route::post('update','Igromania\GameController@update' );

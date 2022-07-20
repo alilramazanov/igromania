@@ -12,7 +12,6 @@ use App\Http\Requests\Igromania\Game\GameListRequest;
 use App\Http\Requests\Igromania\Game\UpdateGameRequest;
 use App\Http\Resources\Igromania\Game\DetailGameResource;
 use App\Http\Resources\Igromania\Game\ListGameResource;
-use App\Http\Responses\ApiResponse;
 
 class GameController extends Controller
 {
@@ -47,7 +46,7 @@ class GameController extends Controller
         $gameDto = $this->dtoFactory::create('gameDto', $request, $this->makeDto);
         $game = $this->gameRepository->createGame($gameDto);
         if ($game){
-            return ApiResponse::response(201, 'Сreated');
+            return response('Created',201);
         }
     }
 
@@ -55,7 +54,7 @@ class GameController extends Controller
         $gameDto = $this->dtoFactory::create('gameDto', $request, $this->makeDto);
         $isUpdateGame = $this->gameRepository->updateGame($gameDto);
         if ($isUpdateGame){
-            return ApiResponse::response(200,'Updated');
+            return response('Updated', 200);
         }
 
     }
@@ -64,7 +63,7 @@ class GameController extends Controller
         $gameDto = $this->dtoFactory::create('gameDto', $request, $this->makeDto);
         $isDeleteGame = $this->gameRepository->deleteGame($gameDto);
         if ($isDeleteGame){
-            return ApiResponse::response(200,'Deleted');
+            return response('Deleted', 200);
         }
     }
 }

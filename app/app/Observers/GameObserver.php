@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Observers;
+
+use App\Models\Game;
+
+class GameObserver
+{
+    /**
+     * Handle the Game "created" event.
+     *
+     * @param  \App\Models\Game  $game
+     * @return void
+     */
+    public function created(Game $game)
+    {
+        //
+    }
+
+    /**
+     * Handle the Game "updated" event.
+     *
+     * @param  \App\Models\Game  $game
+     * @return void
+     */
+    public function updated(Game $game)
+    {
+        //
+    }
+
+
+    public function deleting(Game $game){
+        $game->genres()->detach();
+    }
+    /**
+     * Handle the Game "deleted" event.
+     *
+     * @param  \App\Models\Game  $game
+     * @return void
+     */
+    public function deleted(Game $game)
+    {
+        //
+    }
+
+    /**
+     * Handle the Game "restored" event.
+     *
+     * @param  \App\Models\Game  $game
+     * @return void
+     */
+    public function restored(Game $game)
+    {
+        //
+    }
+
+    /**
+     * Handle the Game "force deleted" event.
+     *
+     * @param  \App\Models\Game  $game
+     * @return void
+     */
+    public function forceDeleted(Game $game)
+    {
+        //
+    }
+}

@@ -8,6 +8,7 @@ use App\Http\Filter\Igromania\GameQueryFilter;
 use App\Http\Services\FileUploadAction;
 use App\Models\Game;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class GameRepository
@@ -51,8 +52,20 @@ class GameRepository
             $data['preview'] = $filePath;
         }
 
-        return $this->gameModel->newQuery()->create($data);
+        $newGame = $this->gameModel->newQuery()->create($data);
 
+        if (!is_null($gameDto->getGenres())){
+            $gameId = $newGame->id;
+            foreach ($gameDto->getGenres() as $genreId) {
+                $data = [
+                    'game_id' => $gameId,
+                    'genre_id' => $genreId
+                ];
+                DB::table('games_genres')->insert($data);
+            }
+        }
+
+        return $newGame;
     }
 
     public function updateGame(GameDto $gameDto){
@@ -80,7 +93,6 @@ class GameRepository
             ->newQuery()
             ->find($gameDto->getId())
             ->delete();
-
     }
 
 }

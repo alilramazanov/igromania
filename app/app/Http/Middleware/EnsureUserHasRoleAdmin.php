@@ -26,7 +26,7 @@ class EnsureUserHasRoleAdmin
 
         $user = auth()->user();
         if (!($user->role_id == User::ROLE_ADMIN) ){
-            return ApiResponse::response(403, 'Forbidden');
+            return response('Forbidden',403);
 
         }
 

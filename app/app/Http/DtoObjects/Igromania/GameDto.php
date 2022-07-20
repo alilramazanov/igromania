@@ -4,6 +4,8 @@ namespace App\Http\DtoObjects\Igromania;
 
 use App\Http\DtoObjects\DtoCore;
 
+use function PHPUnit\Framework\isJson;
+
 
 class GameDto extends DtoCore
 {
@@ -14,6 +16,25 @@ class GameDto extends DtoCore
     protected $description;
     protected $preview;
     protected $studioId;
+    protected $genres;
+
+    /**
+     * @return mixed
+     */
+    public function getGenres()
+    {
+        return $this->genres;
+    }
+
+    /**
+     * @param  mixed  $genres
+     * @return GameDto
+     */
+    public function setGenres($genres)
+    {
+        $this->genres = isJson($genres) ? json_decode($genres) : $genres; 
+        return $this;
+    }
 
     /**
      * @param  mixed  $name

@@ -36,7 +36,9 @@ class GameQueryFilter extends QueryFilter
         $this->builder
             ->select($columns)
             ->leftJoin('games_genres as gg','gg.game_id','=','games.id')
+            ->distinct()
             ->whereIn('genre_id', $value);
+
 
     }
 }
