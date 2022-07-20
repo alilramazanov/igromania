@@ -26,10 +26,10 @@ class FilterGameDto extends DtoCore
         $this->name = $value;
     }
     public function setStudios($value){
-        $this->studios = isJson($value) ? json_decode($value) : $value;
+        $this->studios = $value;
     }
     public function setGenres( $value){
-        $this->genres =  isJson($value) ? json_decode($value) : $value;
+        $this->genres =  $value;
     }
 
 }

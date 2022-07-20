@@ -18,7 +18,16 @@ class CreateGameRequest extends ApiRequest
         return [
             'name' => 'string|min:3|required',
             'studio_id' => 'exists:studios,id',
-            'image|nullable|max:1999'
+            'genres' => 'nullable|array',
+            'preview' => 'image|nullable|max:1999'
         ];
+    }
+
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'genres' => json_decode($this->genres),
+        ]);
     }
 }

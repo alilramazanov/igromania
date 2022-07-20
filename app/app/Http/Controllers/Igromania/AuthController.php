@@ -5,9 +5,40 @@ namespace App\Http\Controllers\Igromania;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Igromania\Auth\LoginRequest;
 use App\Http\Requests\Igromania\Auth\RegistrationRequest;
-use App\Http\Responses\ApiResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+
+/**
+ *  @OA\Post(
+ *     path="/auth/registration",
+ *     tags={"Auth"},
+ *     summary="registration",
+ *     @OA\Response (
+ *          response=201,
+ *          description="Created",
+ *     ),
+ *
+ *     @OA\RequestBody (
+ *          required=true,
+ *          @OA\JsonContent(ref="#/components/schemas/UserDto")
+ *      )
+ * ),
+ *
+ *  @OA\Post(
+ *     path="/auth/login",
+ *     tags={"Auth"},
+ *     summary="login",
+ *     @OA\Response (
+ *          response=200,
+ *          description="Ok",
+ *     ),
+ *
+ *     @OA\RequestBody (
+ *          required=true,
+ *          @OA\JsonContent(ref="#/components/schemas/LoginRequest")
+ *      )
+ * ),
+ */
 
 class AuthController extends Controller
 {
@@ -21,7 +52,7 @@ class AuthController extends Controller
     /**
      * Get a JWT via given credentials.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function login(LoginRequest $request)
     {
@@ -34,7 +65,7 @@ class AuthController extends Controller
             return $this->respondWithToken($token);
         }
 
-        return ApiResponse::response(401,'Unauthorized');
+        return response('Unauthorized',401);
 
     }
 
@@ -52,7 +83,7 @@ class AuthController extends Controller
 
         User::create($data);
 
-        return ApiResponse::response(201, 'created');
+        return response('Created', 201);
     }
 
     /**

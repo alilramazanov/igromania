@@ -15,6 +15,17 @@ class GameListRequest extends ApiRequest
     public function rules()
     {
         return [
+            'genres' => 'nullable|array|',
+            'studios' => 'nullable|array|',
+            'name' => 'nullable|string|between:1,100'
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'genres' => json_decode($this->genres),
+            'studios' => json_decode($this->studios)
+        ]);
     }
 }

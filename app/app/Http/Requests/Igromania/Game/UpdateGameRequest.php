@@ -17,7 +17,18 @@ class UpdateGameRequest extends ApiRequest
     public function rules()
     {
         return [
-            'id' => 'required|exists:games,id|integer'
+            'id' => 'required|exists:games,id|integer',
+            'name' => 'string|min:3|required',
+            'studio_id' => 'exists:studios,id',
+            'genres' => 'nullable|array',
+            'preview' => 'image|nullable|max:1999'
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'genres' => json_decode($this->genres),
+        ]);
     }
 }

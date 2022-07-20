@@ -7,15 +7,83 @@ use App\Http\DtoObjects\DtoCore;
 use function PHPUnit\Framework\isJson;
 
 
+/**
+ * @OA\Schema (
+ *     title="GameDto",
+ *     description="create game, game-dto body data",
+ *     type="object",
+ *     required={"name"},
+ *
+ * )
+ */
 class GameDto extends DtoCore
 {
 
+
+    /**
+     * @OA\Property(
+     *     title="id",
+     *     type="integer",
+     *     description="id of game",
+     *     example=1
+     * )
+     * @var $id integer
+     */
     protected $id;
+
+    /**
+     * @OA\Property(
+     *     title="name",
+     *     type="string",
+     *     description="name of game",
+     *     example="Saints Row 4"
+     * )
+     * @var $name string
+     */
     protected $name;
     protected $slug;
+
+    /**
+     * @OA\Property(
+     *     title="description",
+     *     type="string",
+     *     description="description of game",
+     *     example="The best game in the world"
+     * )
+     * @var $description string
+     */
     protected $description;
+
+    /**
+     * @OA\Property(
+     *     title="preview",
+     *     type="file",
+     *     description="preview of game"
+     * )
+     * @var $description object
+     */
     protected $preview;
-    protected $studioId;
+
+    /**
+     * @OA\Property(
+     *     title="studio_id",
+     *     type="integer",
+     *     description="studio id of game",
+     *     example=1
+     * )
+     * @var $studio_id integer
+     */
+    protected $studio_id;
+
+    /**
+     * @OA\Property(
+     *     title="genres",
+     *     type="string",
+     *     description="genres IDs of game",
+     *     example="[1,4]"
+     * )
+     * @var $genres string
+     */
     protected $genres;
 
     /**
@@ -32,7 +100,7 @@ class GameDto extends DtoCore
      */
     public function setGenres($genres)
     {
-        $this->genres = isJson($genres) ? json_decode($genres) : $genres; 
+        $this->genres = $genres;
         return $this;
     }
 
@@ -82,7 +150,7 @@ class GameDto extends DtoCore
      */
     public function setStudio_id($studioId): GameDto
     {
-        $this->studioId = $studioId;
+        $this->studio_id = $studioId;
         return $this;
     }
 
@@ -134,7 +202,7 @@ class GameDto extends DtoCore
      */
     public function getStudio_Id()
     {
-        return $this->studioId;
+        return $this->studio_id;
     }
 
     /**

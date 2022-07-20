@@ -13,6 +13,123 @@ use App\Http\Requests\Igromania\Game\UpdateGameRequest;
 use App\Http\Resources\Igromania\Game\DetailGameResource;
 use App\Http\Resources\Igromania\Game\ListGameResource;
 
+
+/**
+ *
+ * @OA\Get(
+ *     path="/games/list",
+ *     tags={"Games"},
+ *     summary="Get filtered list of games",
+ *     description="return list of games",
+ *
+ *      @OA\Response(
+ *          response=200,
+ *          description="Successful operation",
+ *     ),
+ *     @OA\Parameter (
+ *          name="name",
+ *          description="name of game. Сase insensitive",
+ *          in="query",
+ *          @OA\Schema (
+ *              type="string",
+ *              example="T"
+ *          )
+ *     ),
+ *    @OA\Parameter (
+ *          name="genres",
+ *          description="array of genre IDs",
+ *          in="query",
+ *          @OA\Schema (
+ *              type="json",
+ *              example="[1,2]"
+ *          )
+ *
+ *     ),
+ *    @OA\Parameter (
+ *          name="studios",
+ *          description="array of studios IDs",
+ *          in="query",
+ *          @OA\Schema (
+ *              type="json",
+ *              example="[1,2]"
+ *          )
+ *
+ *     ),
+ *
+ * )
+ *
+ *
+ *  @OA\Get(
+ *     path="/games/detail",
+ *     tags={"Games"},
+ *     summary="Get detail info of game",
+ *     description="return detail info game",
+ *
+ *      @OA\Response(
+ *          response=200,
+ *          description="Successful operation",
+ *     ),
+ *     @OA\Parameter (
+ *          name="id",
+ *          description="id of game",
+ *          required=true,
+ *          in="query",
+ *          @OA\Schema (
+ *              type="integer",
+ *              example="2"
+ *          )
+ *     ),
+ *)
+ *
+ * @OA\Post(
+ *     path="/games/create",
+ *     tags={"Games"},
+ *     summary="create new game",
+ *     @OA\Response (
+ *          response=201,
+ *          description="Created",
+ *     ),
+ *
+ *     @OA\RequestBody (
+ *          required=true,
+ *          @OA\JsonContent(ref="#/components/schemas/GameDto")
+ *      )
+ * ),
+ *
+ *
+ * @OA\Post(
+ *     path="/games/update",
+ *     tags={"Games"},
+ *     summary="update game",
+ *     @OA\Response (
+ *          response=200,
+ *          description="Updated",
+ *     ),
+ *     @OA\RequestBody (
+ *          required=true,
+ *          @OA\JsonContent(ref="#/components/schemas/GameDto")
+ *      )
+ * ),
+ *
+ * @OA\Post(
+ *     path="/games/delete",
+ *     tags={"Games"},
+ *     summary="delete game",
+ *     @OA\Response (
+ *          response=200,
+ *          description="Deleted",
+ *     ),
+ *     @OA\RequestBody (
+ *          required=true,
+ *          @OA\JsonContent(ref="#/components/schemas/DetailGameRequest")
+ *      )
+ * )
+ *
+ *
+ *
+ *
+ */
+
 class GameController extends Controller
 {
     protected $gameRepository;

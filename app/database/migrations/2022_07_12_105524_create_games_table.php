@@ -18,7 +18,7 @@ class CreateGamesTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->string('preview');
+            $table->string('preview')->nullable();
             $table->foreignId('studio_id')->constrained('studios');
             $table->timestamps();
         });

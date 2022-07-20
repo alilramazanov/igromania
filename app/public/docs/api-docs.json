@@ -1,0 +1,327 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Igromania",
+        "description": "igromania documentation",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8081/api/igromania/v1/",
+            "description": "test"
+        }
+    ],
+    "paths": {
+        "/auth/registration": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "registration",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        },
+        "/games/list": {
+            "get": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Get filtered list of games",
+                "description": "return list of games",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "name of game. Сase insensitive",
+                        "schema": {
+                            "type": "string",
+                            "example": "T"
+                        }
+                    },
+                    {
+                        "name": "genres",
+                        "in": "query",
+                        "description": "array of genre IDs",
+                        "schema": {
+                            "type": "json",
+                            "example": "[1,2]"
+                        }
+                    },
+                    {
+                        "name": "studios",
+                        "in": "query",
+                        "description": "array of studios IDs",
+                        "schema": {
+                            "type": "json",
+                            "example": "[1,2]"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/games/detail": {
+            "get": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Get detail info of game",
+                "description": "return detail info game",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "id of game",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": "2"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/games/create": {
+            "post": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "create new game",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GameDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            }
+        },
+        "/games/update": {
+            "post": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "update game",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GameDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated"
+                    }
+                }
+            }
+        },
+        "/games/delete": {
+            "post": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "delete game",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DetailGameRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Deleted"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "GameDto": {
+                "title": "GameDto",
+                "description": "create game, game-dto body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id of game",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of game",
+                        "type": "string",
+                        "example": "Saints Row 4"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "description of game",
+                        "type": "string",
+                        "example": "The best game in the world"
+                    },
+                    "preview": {
+                        "title": "preview",
+                        "description": "preview of game",
+                        "type": "file"
+                    },
+                    "studio_id": {
+                        "title": "studio_id",
+                        "description": "studio id of game",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "genres": {
+                        "title": "genres",
+                        "description": "genres IDs of game",
+                        "type": "string",
+                        "example": "[1,4]"
+                    }
+                },
+                "type": "object"
+            },
+            "UserDto": {
+                "title": "UserDto",
+                "description": "user-dto body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id of user",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of user",
+                        "type": "string",
+                        "example": "Alex"
+                    },
+                    "email": {
+                        "title": "name",
+                        "description": "email of user",
+                        "type": "string",
+                        "example": "alex@gmail.com"
+                    },
+                    "password": {
+                        "title": "name",
+                        "description": "password of user",
+                        "type": "string",
+                        "example": "alex1234"
+                    },
+                    "role_id": {
+                        "title": "role_id",
+                        "description": "role of user",
+                        "type": "integer",
+                        "example": 2
+                    }
+                },
+                "type": "object"
+            },
+            "LoginRequest": {
+                "title": "LoginRequest",
+                "description": "LoginRequest body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "email": {
+                        "title": "email",
+                        "description": "email of user",
+                        "type": "string",
+                        "example": "admin@gmail.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "password of user",
+                        "type": "string",
+                        "example": "admin1"
+                    }
+                },
+                "type": "object"
+            },
+            "DetailGameRequest": {
+                "title": "DetailGameRequest",
+                "description": "detail game request body data",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "id of game",
+                        "type": "integer",
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
