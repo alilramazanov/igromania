@@ -1,22 +1,16 @@
-
-
-build docker images:
+build-project:
 	docker-compose build
-
-run docker container:
 	docker-compose up -d
-
-install composer:
 	docker-compose exec php-cli composer install --prefer-source --no-interaction
-
-create migration:
-	docker-compose exec php-cli php artisan migrate
-
-run database seeders:
+	docker-compose exec php-cli php artisan migrate:refresh
 	docker-compose exec php-cli php artisan db:seed
-
-create storage link:
 	docker-compose exec php-cli php artisan storage:link
+	docker-compose exec php-cli chmod -R 777 ./storage
+	docker-compose exec php-cli cp -R ./vendor/swagger-api/swagger-ui/dist ./public/docs/asset
+
+
+
+
 
 
 

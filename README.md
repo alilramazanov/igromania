@@ -6,7 +6,7 @@
 
 Clone the repo and change your work directory to root of sources
 
-    git clone git@github.com:alilramazanov/igromania.git
+    git clone git@github.com:alilramazanov/igromania.git -b master
 
     cd igromania
 
